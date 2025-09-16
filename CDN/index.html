@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Naver News</title>
+    <style>
+      html {
+        font-size: 10px;
+      }
+      .box {
+        display: flex;
+        margin: 20px;
+        font-size: 0.8rem;
+      }
+      img {
+        width: 30%;
+        height: 120px;
+      }
+      .box div {
+        width: 70%;
+        margin-left: 10px;
+      }
+      .box h1 {
+        color: rgb(17, 188, 17);
+      }
+      span {
+        margin-right: 5px;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script
+      crossorigin
+      src="https://unpkg.com/react@18/umd/react.development.js"
+    ></script>
+    <script
+      crossorigin
+      src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"
+    ></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <script type="text/babel">
+      const Header = (props) => {
+        console.log(props);
+        return <header>{props.children}</header>;
+      };
+
+      const Section = () => {
+        return (
+          <section>
+            <Box
+              img="news-images/news1.jpeg"
+              h1="경제"
+              h2="수상한 용도변경에 땅값 수천억 이득..."
+              name="땅집고"
+              date={2}
+            />
+            <Box
+              img="news-images/news2.jpeg"
+              h1="건설"
+              h2="대리석 와르르 강남 아파트 논란"
+              name="국민일보"
+              date={1}
+            />
+          </section>
+        );
+      };
+
+      const Box = (props) => {
+        return (
+          <article className="box">
+            <img src={props.img} alt="Thumbnail" />
+            <div>
+              <h1>{props.h1}</h1>
+              <h2>{props.h2}</h2>
+              <p>
+                Lorem ipsum dolor sit amet consectetur adipisicing elit. Quod,
+                deserunt officiis debitis doloribus quibusdam, odio qui facere
+                voluptate optio excepturi maiores quasi quia. Distinctio iste
+                reiciendis velit dignissimos nam pariatur! Veniam consectetur
+                nobis repudiandae earum dicta, rerum iure asperiores nostrum nam
+                molestiae, assumenda quam numquam illo rem dolorem nesciunt
+                tenetur perferendis ratione non ex accusantium voluptatem. Odio
+                harum amet commodi! Enim, consequatur voluptatem! Ratione ullam
+                similique impedit eos dicta praesentium maxime quibusdam ipsam
+                asperiores eius laborum distinctio provident ducimus earum quas,
+                accusamus soluta odit nulla, recusandae quaerat amet obcaecati!
+                Tempora!
+              </p>
+              <span>{props.name}</span>
+              <span>{props.date}일전</span>
+            </div>
+          </article>
+        );
+      };
+
+      const Nav = () => {
+        return (
+          <nav>
+            <ul style={{ display: "flex", justifyContent: "space-around" }}>
+              <li>경제</li>
+              <li>건설</li>
+              <li>기타</li>
+            </ul>
+          </nav>
+        );
+      };
+
+      const App = (
+        <main>
+          <Header>
+            <Nav />
+          </Header>
+          <Section />
+        </main>
+      );
+      ReactDOM.createRoot(document.querySelector("#root")).render(App);
+    </script>
+  </body>
+</html>

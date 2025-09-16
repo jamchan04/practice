@@ -1,0 +1,28 @@
+{
+  "travels": [
+    {
+      "id": "2",
+      "key": "d2a7fda1-af58-4e0c-83fd-8c7c143d9bba",
+      "name": "미국",
+      "image": "https://cdn.pixabay.com/photo/2018/08/15/17/17/mount-rushmore-3608620_1280.jpg"
+    },
+    {
+      "id": "3",
+      "key": "2171c7fa-c218-4b37-8ac7-8987319a81ea",
+      "name": "일본",
+      "image": "https://cdn.pixabay.com/photo/2017/01/28/02/24/japan-2014619_1280.jpg"
+    },
+    {
+      "id": "4",
+      "key": "e3ffd958-0bdf-4f85-9fdb-01a7a390fd44",
+      "name": "이스라엘",
+      "image": "https://cdn.pixabay.com/photo/2016/10/03/21/13/jerusalem-1712855_1280.jpg"
+    },
+    {
+      "id": "6",
+      "key": "82ce2aa5-03d8-4f43-b513-51f5a3c7e15f",
+      "name": "china",
+      "image": "https://cdn.pixabay.com/photo/2018/09/13/21/43/temple-of-heaven-3675835_1280.jpg"
+    }
+  ]
+}

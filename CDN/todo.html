@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="./todo-css/todo.css" />
+  </head>
+  <body>
+    <div id="root"></div>
+    <script
+      crossorigin
+      src="https://unpkg.com/react@18/umd/react.development.js"
+    ></script>
+    <script
+      crossorigin
+      src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"
+    ></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <script type="text/babel">
+      const TodoContainer = (props) => {
+        return (
+          <section>
+            <h2>할일목록</h2>
+            <input
+              value={props.inputVal}
+              onChange={props.conChangeHandler}
+              className="default-input"
+              type="text"
+            />
+            <button onClick={props.onClickHandler} className="addTodoBtn">
+              ➕
+            </button>
+            <ul id="list-box">
+              {props.todoList.map((item) => (
+                <TodoItem todo={item} key={item.id} onDone={props.onDone} />
+              ))}
+            </ul>
+          </section>
+        );
+      };
+
+      const TodoItem = (props) => {
+        return (
+          <>
+            <li onClick={() => props.onDone(props.todo.id)}>
+              {props.todo.text}
+            </li>
+          </>
+        );
+      };
+
+      const ScoreComp = (props) => {
+        return (
+          <section className="score-container">
+            <p>
+              칭찬점수:<span id="score-num">{props.score}</span>점
+            </p>
+          </section>
+        );
+      };
+
+      const Container = () => {
+        const [inputVal, setInputValue] = React.useState("");
+        const [todo, setTodo] = React.useState([]);
+        const [score, setScore] = React.useState(0);
+        const itemId = React.useRef(0);
+
+        function changeHandle(e) {
+          setInputValue(e.target.value);
+        }
+
+        function clickHandle() {
+          const trimmedInput = inputVal.trim(); // 입력 값이 없거나 공백만 있을때 그를 막기위해 입력값에서 먼저 공백을 제거
+          if (trimmedInput === "") {
+            // 공백 제거 후 문자열이 빈문자열 이라면 그 입력을 무시
+            setInputValue("");
+            alert("내용을 입력 해주세요.");
+            return;
+          }
+          const newItem = {
+            id: itemId.current++, // useRef를 이용하여 각 todo에 고유 ID 부여
+            text: inputVal,
+          };
+          setTodo([...todo, newItem]);
+          setScore(score + 5);
+          setInputValue("");
+        }
+
+        function handleDone(id) {
+          // todoList에서 클릭한 항목 제거
+          const newTodoList = todo.filter((item) => item.id != id);
+          setTodo(newTodoList);
+          setScore(score + 5);
+        }
+
+        return (
+          <div>
+            <main>
+              <ScoreComp score={score} />
+              <TodoContainer
+                onClickHandler={clickHandle}
+                conChangeHandler={changeHandle}
+                inputVal={inputVal}
+                todoList={todo}
+                onDone={handleDone}
+              />
+            </main>
+            <footer>Copyright © 2022 All Rights Reserved</footer>
+          </div>
+        );
+      };
+
+      const App = () => <Container />;
+      ReactDOM.createRoot(
+        // React18
+        document.querySelector("#root")
+      ).render(<App />);
+    </script>
+  </body>
+</html>
